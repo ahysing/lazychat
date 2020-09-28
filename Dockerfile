@@ -11,8 +11,6 @@ COPY cmd cmd
 COPY pkg pkg
 RUN mkdir -p ${WORKDIR}/build
 COPY web ${WORKDIR}/build/web
-COPY run.sh ${WORKDIR}/build/run.sh
-
 
 RUN mkdir ${WORKDIR}/gopath
 ENV GOPATH ${WORKDIR}/gopath
