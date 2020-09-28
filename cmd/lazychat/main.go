@@ -3,9 +3,10 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/pexip/lazychat/pkg/lazychat"
 	"log"
 	"net/http"
+
+	"github.com/ahysing/lazychat/pkg/lazychat"
 )
 
 var addr = flag.String("addr", ":8080", "http service address")
