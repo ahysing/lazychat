@@ -3,7 +3,7 @@
 name: Build & Push
 
 env:
-    PROJECT_ID: ${{ secrets.PROJECT_ID }}
+    PROJECT_ID: px-sre-homework
     IMAGE: ahysing/lazychat
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -28,5 +28,4 @@ jobs:
         docker build \
         --tag "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
         --tag "gcr.io/$PROJECT_ID/$IMAGE:latest" \
-        --build-arg REGISTRY="gcr.io" \
         .
