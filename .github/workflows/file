@@ -1,0 +1,47 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Build & Push
+
+env:
+    PROJECT_ID: px-sre-homework
+    IMAGE: ahysing/lazychat
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+    
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  push:
+    runs-on: ubuntu-20.04
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+    - name: docker build and push 
+      run: |
+        docker build \
+        --tag eu.gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA \
+        --tag eu.gcr.io/$PROJECT_ID/$IMAGE:latest \
+        .
+    # https://github.com/docker/login-action#google-container-registry-gcr
+    - name: Login to GCR
+        uses: docker/login-action@v1
+        with:
+          registry: eu.gcr.io
+          username: _json_key
+          password: ${{ secrets.GCR_JSON_KEY }}
+    - name: push $GITHUB_SHA
+      run: |
+        docker push \
+        --tag "eu.gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
+    - name: push $GITHUB_SHA
+      run: |
+        docker push \
+        --tag "eu.gcr.io/$PROJECT_ID/$IMAGE:$latest
+      
