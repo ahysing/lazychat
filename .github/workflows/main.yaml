@@ -37,5 +37,5 @@ jobs:
         docker push eu.gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
     - name: push latest
       run: |
-        docker push eu.gcr.io/$PROJECT_ID/$IMAGE:$latest
+        docker push eu.gcr.io/$PROJECT_ID/$IMAGE:latest
 
